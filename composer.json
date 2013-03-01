@@ -1,0 +1,22 @@
+{
+    "name": "rgsystemes/olark-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "description": "Integrate easily Olark into your Symfony2 projects",
+    "keywords": ["olark", "symfony"],
+    "homepage": "https://github.com/rgsystemes/olark-bundle",
+    "authors": [
+        {
+            "name": "COLE Edouard",
+            "email": "ed@rg-systemes.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*"
+    },
+    "autoload": {
+        "psr-0": { "RG\\OlarkBundle": "" }
+    },
+    "target-dir": "RG/OlarkBundle"
+}
