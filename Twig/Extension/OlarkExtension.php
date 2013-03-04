@@ -36,7 +36,10 @@ class OlarkExtension extends \Twig_Extension
      */
     public function getOlarkId()
     {
-        return $this->container->getParameter('rg_olark.id');
+        if ($this->container->hasParameter('rg_olark.id'))
+            return $this->container->getParameter('rg_olark.id');
+
+        return null;
     }
 
     /**
