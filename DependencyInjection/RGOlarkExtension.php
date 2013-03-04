@@ -35,6 +35,7 @@ class RGOlarkExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter("rg_olark.id", $config["id"]);
+        if (isset($config["id"]))
+            $container->setParameter("rg_olark.id", $config["id"]);
     }
 }
