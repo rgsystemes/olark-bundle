@@ -63,6 +63,16 @@ In your template:
 
     {% include "OlarkBundle::olark.html.twig" %}
 
+In your controllers:
+
+    $olarkOptions = $this->container->get('rg_olark_options');
+    $olarkOptions["name"] = $this->getUser()->getUsername();
+
+Available Olark options:
+
+  - api.chat.updateVisitorNickname (through $olarkOptions["name"])
+  - api.chat.updateVisitorStatus (through $olarkOptions["status"])
+
 
 Overriding the template
 =======================

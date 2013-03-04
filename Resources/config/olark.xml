@@ -5,6 +5,9 @@
 
     <services>
 
+        <!-- The options holder -->
+        <service id="rg_olark_options" class="ArrayObject"></service>
+
         <!-- Twig extension -->
         <service id="rg_olark.twig" class="RG\OlarkBundle\Twig\Extension\OlarkExtension">
           <argument type="service" id="service_container" />
