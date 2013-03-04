@@ -19,7 +19,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->
             children()->
-                scalarNode("id")->cannotBeEmpty()->end()->
+                scalarNode("id")->end()->
             end()
         ;
 
