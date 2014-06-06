@@ -36,9 +36,24 @@ class OlarkExtension extends \Twig_Extension
      */
     public function getOlarkId()
     {
+        // If a branded id is defined
+        $brandedId = $this->getOlarkOption('branded_id');
+        if (!is_null($brandedId)) {
+            // If the defined branded id is an empty string, it means
+            // we don't wanna use the one given in the configuration file
+            if (strlen($brandedId) == 0)
+                return null;
+
+            // But if it's not an empty string, it means we want to overload the
+            // given one in the configuration file
+            return $brandedId;
+        }
+
+        // If there's no support for branded olark id, we simply use the configuration file
         if ($this->container->hasParameter('rg_olark.id'))
             return $this->container->getParameter('rg_olark.id');
 
+        // There's no support for olark detected !
         return null;
     }
 
