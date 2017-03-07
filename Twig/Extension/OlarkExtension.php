@@ -24,8 +24,8 @@ class OlarkExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            "rg_olark_id" => new \Twig_Function_Method($this, "getOlarkId", array("is_safe" => array("html"))),
-            "rg_olark_option" => new \Twig_Function_Method($this, "getOlarkOption", array("is_safe" => array("html"))),
+            "rg_olark_id" => new \Twig_SimpleFunction('getOlarkId', array($this, 'getOlarkId'), array('is_safe' => array('html'))),
+            "rg_olark_option" => new \Twig_SimpleFunction('getOlarkOption', array($this, 'getOlarkOption'), array('is_safe' => array('html'))),
         );
     }
 
