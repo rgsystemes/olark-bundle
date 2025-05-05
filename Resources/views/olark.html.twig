@@ -1,6 +1,28 @@
 {% if rg_olark_id()|length %}
 <script nonce="NGINX_CSP_NONCE">
-    window.olark||(function(k){var g=window,j=document,a=g.location.protocol=="https:"?"https:":"http:",i=k.name,b="load",h="addEventListener";(function(){g[i]=function(){(c.s=c.s||[]).push(arguments)};var c=g[i]._={},f=k.methods.length;while(f--){(function(l){g[i][l]=function(){g[i]("call",l,arguments)}})(k.methods[f])}c.l=k.loader;c.i=arguments.callee;c.p={0:+new Date};c.P=function(l){c.p[l]=new Date-c.p[0]};function e(){c.P(b);g[i](b)}g[h]?g[h](b,e,false):g.attachEvent("on"+b,e);c.P(1);var d=j.createElement("script"),m=document.getElementsByTagName("script")[0];d.type="text/javascript";d.async=true;d.src=a+"//"+c.l;m.parentNode.insertBefore(d,m);c.P(2)})()})({loader:(function(a){return "static.olark.com/jsclient/loader1.js?ts="+(a?a[1]:(+new Date))})(document.cookie.match(/olarkld=([0-9]+)/)),name:"olark",methods:["configure","extend","declare","identify"]}); olark.identify('{{ rg_olark_id() }}');
+    const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations) {
+            mutation.addedNodes.forEach(node => {
+                if (node.tagName === "IFRAME" && node.srcdoc) {
+                    node.srcdoc = node.srcdoc.replace(/<script(?:( [^n])|(>))/g, '<script nonce="NGINX_CSP_NONCE"$1$2');
+                }
+            });
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+</script>
+<script nonce="NGINX_CSP_NONCE" type="text/javascript" async>
+    ;(function(o,l,a,r,k,y){if(o.olark)return;
+    r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0];
+    y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r);
+    y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)};
+    y.extend=function(i,j){y("extend",i,j)};
+    y.identify=function(i){y("identify",k.i=i)};
+    y.configure=function(i,j){y("configure",i,j);k.c[i]=j};
+    k=y._={s:[],t:[+new Date],c:{},l:a};
+    })(window,document,"static.olark.com/jsclient/loader.js");
+    olark.identify('{{ rg_olark_id() }}');
     {% if rg_olark_option("name")|length %}
     olark('api.chat.updateVisitorNickname', { snippet: "{{ rg_olark_option("name") }}" });
     {% endif %}
