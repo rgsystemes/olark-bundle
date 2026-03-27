@@ -3,11 +3,13 @@
 namespace RG\OlarkBundle\Twig\Extension;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Provides an extension for Twig to get the Olark log_id
  */
-class OlarkExtension extends \Twig_Extension
+class OlarkExtension extends AbstractExtension
 {
     protected $container;
 
@@ -24,8 +26,8 @@ class OlarkExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('rg_olark_id', array($this, 'getOlarkId'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('rg_olark_option', array($this, 'getOlarkOption'), array('is_safe' => array('html')))
+            new TwigFunction('rg_olark_id', array($this, 'getOlarkId'), array('is_safe' => array('html'))),
+            new TwigFunction('rg_olark_option', array($this, 'getOlarkOption'), array('is_safe' => array('html')))
         );
     }
 
@@ -69,15 +71,5 @@ class OlarkExtension extends \Twig_Extension
             return null;
 
         return $olarkOptions[$key];
-    }
-
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string The extension name
-     */
-    public function getName()
-    {
-        return "olark";
     }
 }
